@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Raffy D. Escalona — Operations Manager | SecureShell ICT</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blk:#080808;--blk2:#0F0F0F;--blk3:#161616;--blk4:#1E1E1E;
+  --gdk:#2A2A2A;--gmd:#404040;--g:#6A6A6A;--glt:#9A9A9A;
+  --sv:#B8BCC6;--svl:#D0D4DC;--svb:#E6EAF0;
+  --gd:#C19B2E;--gd2:#D4AE4A;--gd3:#E8C96A;--gd4:#F2DC96;
+  --gdb:rgba(193,155,46,0.12);--gdbr:rgba(193,155,46,0.22);
+  --w:#F8F8F6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--blk);color:var(--w);overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--blk)}::-webkit-scrollbar-thumb{background:var(--gd)}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;justify-content:space-between;align-items:center;padding:1rem 2.5rem;background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(193,155,46,0.1)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;letter-spacing:.04em}
+.nav-logo span{color:var(--gd)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--g);transition:color .2s}
+.nav-links a:hover,.nav-links a.act{color:var(--gd)}
+.nav-cta{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--gd);color:var(--gd);padding:.42rem 1.2rem;transition:all .2s}
+.nav-cta:hover{background:var(--gd);color:var(--blk)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:7rem 2.5rem 4rem;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:15%;right:0;width:55%;height:70%;background:radial-gradient(ellipse at right,rgba(193,155,46,0.055) 0%,transparent 65%);pointer-events:none}
+.hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:72px 72px}
+.hero-vline{position:absolute;left:200px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(193,155,46,.1) 25%,rgba(193,155,46,.1) 75%,transparent)}
+.hero-content{position:relative;max-width:820px;width:100%}
+.hero-eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem}
+.ew{width:28px;height:1px;background:var(--gd)}
+.et{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gd);font-weight:500}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,7vw,5.8rem);font-weight:900;line-height:.97;letter-spacing:-.015em;margin-bottom:1.5rem}
+.l1{display:block;color:var(--w)}
+.l2{display:block;-webkit-text-stroke:1px var(--sv);color:transparent;letter-spacing:.05em}
+.l3{display:block;background:linear-gradient(100deg,var(--gd),var(--gd2),var(--gd3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:.98rem;color:var(--glt);max-width:480px;line-height:1.78;font-weight:300;margin-bottom:2.25rem}
+.hstats{display:flex;gap:0;border:1px solid var(--gdk);margin-bottom:2.5rem}
+.hs{flex:1;padding:.9rem 1.1rem;border-right:1px solid var(--gdk);position:relative;overflow:hidden;transition:background .2s}
+.hs:last-child{border-right:none}
+.hs:hover{background:rgba(193,155,46,.04)}
+.hs::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gd),var(--gd2));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.hs:hover::after{transform:scaleX(1)}
+.hs-v{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--gd);line-height:1}
+.hs-l{font-size:.64rem;color:var(--g);margin-top:.25rem;letter-spacing:.07em;text-transform:uppercase}
+.hbtns{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-g{background:linear-gradient(130deg,var(--gd),var(--gd2));color:var(--blk);padding:.78rem 1.9rem;font-size:.8rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-g:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(193,155,46,.25)}
+.btn-o{border:1px solid var(--gmd);color:var(--sv);padding:.78rem 1.9rem;font-size:.8rem;font-weight:400;letter-spacing:.07em;text-transform:uppercase;transition:all .2s}
+.btn-o:hover{border-color:var(--gd);color:var(--gd)}
+.hero-side{position:absolute;right:0;top:50%;transform:translateY(-50%);width:280px;background:rgba(15,15,15,.96);border:1px solid var(--gdk);backdrop-filter:blur(12px)}
+.hs-hdr{padding:.65rem 1rem;border-bottom:1px solid var(--gdk);display:flex;justify-content:space-between;align-items:center}
+.hs-ht{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g)}
+.live-dot{display:flex;align-items:center;gap:.35rem;font-size:.62rem;color:var(--gd);letter-spacing:.06em}
+.live-dot::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gd);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.sr-row{display:flex;justify-content:space-between;align-items:center;padding:.62rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);font-size:.75rem}
+.sr-row:last-child{border-bottom:none}
+.sr-l{color:var(--glt)}
+.sr-v{font-family:'DM Mono',monospace;color:var(--gd2);font-size:.78rem}
+.sr-bar{margin:.3rem 1rem .7rem;height:2px;background:var(--gdk);overflow:hidden}
+.sr-fill{height:100%;background:linear-gradient(90deg,var(--gd),var(--gd2));animation:srf 2s ease forwards}
+@keyframes srf{from{width:0}to{width:var(--w2)}}
+
+/* SECTIONS */
+section{padding:5.5rem 2.5rem}
+.container{max-width:1100px;margin:0 auto}
+.eye{display:flex;align-items:center;gap:.65rem;margin-bottom:.65rem}
+.eye-l{width:22px;height:1px;background:var(--gd)}
+.eye-t{font-size:.67rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gd);font-weight:500}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);font-weight:700;line-height:1.1;margin-bottom:.85rem}
+.sdesc{font-size:.92rem;color:var(--glt);max-width:520px;line-height:1.78;font-weight:300}
+.shdr{margin-bottom:3.25rem}
+.gold-hr{height:1px;background:linear-gradient(90deg,transparent,var(--gd),transparent);opacity:.25;margin:0}
+
+/* ABOUT */
+.about-sec{background:var(--blk2);border-top:1px solid var(--gdk)}
+.ab-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:4.5rem;align-items:center}
+.ab-body p{font-size:.92rem;color:var(--glt);line-height:1.8;margin-bottom:.9rem;font-weight:300}
+.ab-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.4rem}
+.atag{border:1px solid var(--gdk);color:var(--sv);padding:.28rem .75rem;font-size:.7rem;letter-spacing:.04em;transition:all .2s}
+.atag:hover{border-color:var(--gd);color:var(--gd)}
+.ab-cards{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.ac{background:var(--blk3);border:1px solid var(--gdk);padding:1.1rem;position:relative;overflow:hidden;transition:border-color .25s}
+.ac:hover{border-color:var(--gdbr)}
+.ac::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gd),var(--gd2));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.ac:hover::before{transform:scaleX(1)}
+.ac.wide{grid-column:1/-1;background:var(--gdk)}
+.ac-v{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:700;color:var(--gd);line-height:1}
+.ac-l{font-size:.73rem;color:var(--glt);margin-top:.28rem;line-height:1.45}
+.ac-i{font-size:1.1rem;margin-bottom:.5rem;color:var(--gd);opacity:.8}
+
+/* SECURESHELL COMPANY */
+.ss-sec{background:var(--blk);position:relative;overflow:hidden}
+.ss-wm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:18vw;font-weight:900;color:rgba(255,255,255,.008);white-space:nowrap;pointer-events:none}
+.ss-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.ss-brand{display:flex;align-items:center;gap:1rem;margin-bottom:1.75rem}
+.ss-logo{width:56px;height:56px;background:linear-gradient(135deg,var(--gd),var(--gd2));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:900;font-size:1.4rem;color:var(--blk);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.ss-n{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--w)}
+.ss-st{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g)}
+.ss-body{font-size:.88rem;color:var(--glt);line-height:1.82;margin-bottom:1.4rem;font-weight:300}
+.cli-lbl{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gd);margin-bottom:.65rem}
+.cli-row{display:flex;flex-wrap:wrap;gap:.38rem;margin-bottom:1.75rem}
+.cpill{border:1px solid var(--gdk);color:var(--sv);padding:.22rem .68rem;font-size:.69rem;font-family:'DM Mono',monospace;letter-spacing:.04em;transition:border-color .2s}
+.cpill:hover{border-color:var(--gd);color:var(--gd)}
+.tl{margin-top:.5rem}
+.tl-i{display:flex;gap:.9rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.045)}
+.tl-i:last-child{border-bottom:none}
+.tl-y{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--gd);width:34px;flex-shrink:0;padding-top:2px}
+.tl-d{width:7px;height:7px;border-radius:50%;background:var(--gd);flex-shrink:0;margin-top:4px;box-shadow:0 0 5px var(--gd)}
+.tl-t{font-size:.82rem;font-weight:500;color:var(--svl);line-height:1.35}
+.tl-s{font-size:.74rem;color:var(--g);margin-top:.18rem;line-height:1.5}
+.ss-metrics{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.smc{background:var(--blk3);border:1px solid var(--gdk);padding:1.2rem;position:relative;overflow:hidden;transition:border-color .25s,transform .2s}
+.smc:hover{border-color:var(--gdbr);transform:translateY(-2px)}
+.smc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gd),transparent);opacity:0;transition:opacity .3s}
+.smc:hover::after{opacity:1}
+.smc-v{font-family:'Cormorant Garamond',serif;font-size:1.95rem;font-weight:700;color:var(--gd);line-height:1}
+.smc-l{font-size:.71rem;color:var(--glt);margin-top:.22rem}
+.smc-n{font-size:.65rem;color:var(--gd);margin-top:.32rem;font-family:'DM Mono',monospace;opacity:.8}
+
+/* SERVICES */
+.svc-sec{background:var(--blk2);border-top:1px solid var(--gdk)}
+.svc-intro{font-size:.92rem;color:var(--glt);line-height:1.8;font-weight:300;margin-bottom:2.5rem;max-width:700px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--gdk);overflow:hidden;margin-bottom:2rem}
+.svc-card{background:var(--blk3);padding:1.5rem;transition:background .2s}
+.svc-card:hover{background:var(--blk4)}
+.svc-icon{font-size:1.4rem;color:var(--gd);margin-bottom:.75rem}
+.svc-title{font-size:.88rem;font-weight:600;color:var(--w);margin-bottom:.5rem;letter-spacing:.02em}
+.svc-desc{font-size:.78rem;color:var(--glt);line-height:1.65;font-weight:300}
+.svc-items{margin-top:.6rem}
+.svc-items li{font-size:.73rem;color:var(--g);padding-left:.9rem;position:relative;line-height:1.6}
+.svc-items li::before{content:'·';position:absolute;left:0;color:var(--gd)}
+
+/* MILESTONES */
+.ms-sec{background:var(--blk);border-top:1px solid var(--gdk);position:relative;overflow:hidden}
+.ms-sec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gd),transparent);opacity:.35}
+.ms-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;border:1px solid var(--gdk);overflow:hidden;margin-bottom:3rem}
+.ms-card{background:var(--blk3);padding:1.4rem;transition:background .2s;position:relative;overflow:hidden}
+.ms-card:hover{background:var(--blk4)}
+.ms-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gd),var(--gd2));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.ms-card:hover::after{transform:scaleX(1)}
+.ms-yr{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--gd);margin-bottom:.75rem;font-weight:500}
+.ms-item{font-size:.74rem;color:var(--glt);padding-left:.9rem;position:relative;margin-bottom:.32rem;line-height:1.5}
+.ms-item::before{content:'▸';position:absolute;left:0;color:var(--gd);font-size:.65rem;top:.1rem}
+
+/* SITES GALLERY */
+.gallery-sec{background:var(--blk2);border-top:1px solid var(--gdk)}
+.gal-tabs{display:flex;gap:0;border:1px solid var(--gdk);margin-bottom:1.75rem;overflow-x:auto}
+.gtab{padding:.55rem 1.25rem;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g);border-right:1px solid var(--gdk);cursor:pointer;transition:all .2s;white-space:nowrap;background:transparent}
+.gtab:last-child{border-right:none}
+.gtab.on{background:var(--gdb);color:var(--gd);border-bottom:2px solid var(--gd)}
+.gtab:hover:not(.on){color:var(--sv);background:rgba(255,255,255,.03)}
+.gal-pane{display:none}
+.gal-pane.on{display:block}
+.gal-desc{font-size:.85rem;color:var(--glt);line-height:1.75;margin-bottom:1.5rem;font-weight:300;max-width:680px}
+.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.photo-card{background:var(--blk3);border:1px solid var(--gdk);overflow:hidden;position:relative;aspect-ratio:1}
+.photo-card img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%) brightness(.9) contrast(1.05);transition:filter .3s,transform .3s}
+.photo-card:hover img{filter:grayscale(0%) brightness(1);transform:scale(1.04)}
+.photo-lbl{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.88),transparent);padding:.6rem .65rem .4rem;font-size:.65rem;color:var(--gd2);letter-spacing:.04em}
+.photo-placeholder{width:100%;height:100%;background:var(--blk4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem}
+.photo-placeholder span{font-size:.65rem;color:var(--g);text-align:center;padding:.2rem}
+
+/* PROJECTS */
+.proj-sec{background:var(--blk);border-top:1px solid var(--gdk)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--gdk);overflow:hidden}
+.pc{background:var(--blk3);transition:background .2s}
+.pc:hover{background:var(--blk4)}
+.pc-top{padding:1.4rem;border-bottom:1px solid var(--gdk)}
+.pc-cl{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gd);margin-bottom:.42rem;font-weight:500}
+.pc-nm{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:var(--w);line-height:1.3;margin-bottom:.5rem}
+.pc-ds{font-size:.77rem;color:var(--glt);line-height:1.65;font-weight:300}
+.pc-bot{padding:.8rem 1.4rem;display:flex;justify-content:space-between;align-items:center}
+.pc-sc{font-size:.65rem;letter-spacing:.05em;color:var(--gd);border:1px solid var(--gdbr);padding:.18rem .55rem}
+.pc-vl{font-family:'DM Mono',monospace;font-size:.73rem;color:var(--sv)}
+
+/* BRAND PARTNERS */
+.brand-sec{background:var(--blk2);border-top:1px solid var(--gdk)}
+.brand-intro{font-size:.88rem;color:var(--glt);margin-bottom:2rem;font-weight:300}
+.brand-cat{margin-bottom:2rem}
+.bcat-title{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gd);margin-bottom:.85rem;font-weight:500}
+.brand-chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.bchip{border:1px solid var(--gdk);color:var(--sv);padding:.28rem .72rem;font-size:.72rem;letter-spacing:.03em;transition:all .2s}
+.bchip:hover{border-color:var(--gd);color:var(--gd)}
+
+/* VALUES */
+.val-sec{background:var(--blk);border-top:1px solid var(--gdk)}
+.val-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--gdk);overflow:hidden}
+.vc{background:var(--blk3);padding:1.5rem;transition:background .2s;position:relative;overflow:hidden}
+.vc:hover{background:var(--blk4)}
+.vc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gd),var(--gd2));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.vc:hover::after{transform:scaleX(1)}
+.vc-icon{font-size:1.5rem;color:var(--gd);margin-bottom:.75rem}
+.vc-t{font-size:.82rem;font-weight:600;color:var(--w);margin-bottom:.4rem;letter-spacing:.04em}
+.vc-d{font-size:.76rem;color:var(--glt);line-height:1.65;font-weight:300}
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.vm{background:var(--blk3);border:1px solid var(--gdk);padding:1.5rem;text-align:center;position:relative;overflow:hidden}
+.vm::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gd),transparent)}
+.vm-icon{font-size:2rem;color:var(--gd);margin-bottom:.75rem}
+.vm-t{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:var(--gd);margin-bottom:.6rem}
+.vm-d{font-size:.82rem;color:var(--glt);line-height:1.75;font-weight:300}
+
+/* EXPERIENCE */
+.exp-sec{background:var(--blk2);border-top:1px solid var(--gdk)}
+.exp-list{border:1px solid var(--gdk);overflow:hidden}
+.exp-item{border-bottom:1px solid var(--gdk);transition:background .2s}
+.exp-item:last-child{border-bottom:none}
+.exp-item.on{background:var(--blk4)}
+.exp-inner{display:grid;grid-template-columns:3px 1fr;cursor:pointer}
+.exp-bar{background:var(--gdk);transition:background .3s}
+.exp-item.on .exp-bar{background:linear-gradient(to bottom,var(--gd),var(--gd2))}
+.exp-wrap{padding:1.4rem 1.65rem}
+.exp-hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.exp-ttl{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--w)}
+.exp-co{font-size:.8rem;color:var(--gd);font-weight:500;margin-top:.12rem}
+.exp-rt{text-align:right;flex-shrink:0}
+.exp-pd{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--glt);display:block}
+.exp-lc{font-size:.7rem;color:var(--g);margin-top:.18rem}
+.exp-tb{font-size:.65rem;color:var(--gd);margin-top:.38rem;letter-spacing:.06em;text-transform:uppercase}
+.exp-body{display:none;margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--gdk)}
+.exp-item.on .exp-body{display:block}
+.exp-intro{font-size:.83rem;color:var(--glt);line-height:1.75;margin-bottom:.9rem;font-style:italic;font-weight:300}
+.exp-sh{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gd);margin:.85rem 0 .42rem}
+.exp-bul{list-style:none}
+.exp-bul li{font-size:.83rem;color:var(--sv);padding-left:.9rem;position:relative;line-height:1.65;margin-bottom:.3rem}
+.exp-bul li::before{content:'—';position:absolute;left:0;color:var(--gd);font-size:.7rem}
+.exp-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.9rem}
+.echip{border:1px solid var(--gdk);color:var(--g);padding:.18rem .6rem;font-size:.68rem;letter-spacing:.04em}
+
+/* METRICS */
+.met-sec{background:var(--blk);border-top:1px solid var(--gdk);position:relative;overflow:hidden}
+.met-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--gdk);margin-bottom:2rem;overflow:hidden}
+.mc{background:var(--blk3);padding:1.4rem;text-align:center;transition:background .2s}
+.mc:hover{background:var(--blk4)}
+.mc-v{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gd);margin-bottom:.18rem}
+.mc-l{font-size:.7rem;color:var(--glt);letter-spacing:.04em}
+.mc-s{font-size:.64rem;color:var(--g);margin-top:.25rem;font-family:'DM Mono',monospace}
+.chart-bx{background:var(--blk3);border:1px solid var(--gdk);padding:1.75rem}
+.chart-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.chart-t{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--w)}
+.chart-leg{display:flex;gap:1.25rem;font-size:.7rem;color:var(--g)}
+.ldot{width:8px;height:8px;display:inline-block;margin-right:.28rem;vertical-align:middle}
+.barchart{display:flex;gap:.65rem;align-items:flex-end;height:170px}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:.35rem;height:100%}
+.bwrap{flex:1;width:100%;display:flex;align-items:flex-end}
+.bar{width:100%;border-radius:1px 1px 0 0;transition:opacity .2s}
+.bar:hover{opacity:.72}
+.bar.act{background:linear-gradient(to top,var(--gd),var(--gd2))}
+.bar.tgt{background:rgba(184,188,196,.1);border:1px solid rgba(184,188,196,.2);border-bottom:none}
+.bval{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--gd2);white-space:nowrap}
+.bval.t{color:var(--sv)}
+.blbl{font-size:.65rem;color:var(--g);font-family:'DM Mono',monospace}
+.blbl.t{color:var(--sv)}
+
+/* SKILLS */
+.sk-sec{background:var(--blk2);border-top:1px solid var(--gdk)}
+.sk-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.sg-t{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gd);margin-bottom:1.2rem;font-weight:500}
+.ski{display:flex;align-items:center;gap:.9rem;margin-bottom:.82rem}
+.sk-n{font-size:.8rem;color:var(--sv);width:165px;flex-shrink:0}
+.sk-tr{flex:1;height:2px;background:var(--gdk)}
+.sk-fl{height:100%;background:linear-gradient(90deg,var(--gd),var(--gd2));animation:skf 1.8s ease forwards;transform-origin:left}
+@keyframes skf{from{width:0}to{width:var(--p)}}
+.sk-pct{font-family:'DM Mono',monospace;font-size:.66rem;color:var(--gd);width:26px;text-align:right}
+.tools-s{display:flex;flex-direction:column;gap:1.75rem}
+.chips{display:flex;flex-wrap:wrap;gap:.38rem}
+.chip{border:1px solid var(--gdk);color:var(--glt);padding:.28rem .7rem;font-size:.7rem;letter-spacing:.04em;transition:all .2s}
+.chip:hover{border-color:var(--gd);color:var(--gd)}
+.edu-box{background:var(--blk3);border:1px solid var(--gdk);padding:1rem 1.1rem;margin-top:.25rem;border-top:2px solid var(--gd)}
+.edu-t{font-size:.83rem;color:var(--svl);font-weight:500}
+.edu-s{font-size:.76rem;color:var(--glt);margin-top:.2rem}
+.edu-y{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--gd);margin-top:.28rem}
+
+/* CONTACT */
+.ct-sec{background:var(--blk);border-top:1px solid var(--gdk);position:relative;overflow:hidden}
+.ct-sec::before{content:'';position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:800px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(193,155,46,.045) 0%,transparent 60%)}
+.ct-inner{position:relative;text-align:center;max-width:620px;margin:0 auto}
+.ct-t{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;color:var(--w);margin-bottom:.9rem}
+.ct-t span{background:linear-gradient(120deg,var(--gd),var(--gd2),var(--gd3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ct-sub{font-size:.9rem;color:var(--glt);line-height:1.78;margin-bottom:2.25rem;font-weight:300}
+.ct-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--gdk);margin-bottom:1.75rem;overflow:hidden}
+.ccc{background:var(--blk3);padding:1.4rem;text-align:center;transition:background .2s}
+.ccc:hover{background:var(--blk4)}
+.ccc-i{font-size:1.1rem;color:var(--gd);margin-bottom:.42rem}
+.ccc-l{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:.32rem}
+.ccc-v{font-size:.82rem;color:var(--svl)}
+.web-link{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--gdbr);color:var(--gd);padding:.55rem 1.5rem;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;transition:all .2s;margin-bottom:1.5rem}
+.web-link:hover{background:var(--gdb)}
+.refs{font-size:.76rem;color:var(--g);line-height:1.85;margin-top:1.5rem}
+.refs strong{color:var(--sv)}
+
+/* FOOTER */
+footer{background:var(--blk2);border-top:1px solid var(--gdk);padding:1.4rem 2.5rem;display:flex;justify-content:space-between;align-items:center}
+.fl,.fr{font-size:.72rem;color:var(--g)}
+.fl strong,.fr strong{color:var(--gd)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .75s ease,transform .75s ease}
+.rvl{opacity:0;transform:translateX(-18px);transition:opacity .75s ease,transform .75s ease}
+.rvr{opacity:0;transform:translateX(18px);transition:opacity .75s ease,transform .75s ease}
+.rv.vis,.rvl.vis,.rvr.vis{opacity:1;transform:none}
+
+@media(max-width:960px){
+  .hero-side,.hero-vline{display:none}
+  .ab-grid,.ss-grid,.sk-grid{grid-template-columns:1fr}
+  .met-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-grid{grid-template-columns:1fr 1fr}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .ms-grid{grid-template-columns:repeat(3,1fr)}
+  .val-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .ct-cards{grid-template-columns:1fr}
+  .photo-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .met-grid,.proj-grid,.svc-grid,.val-grid,.ms-grid{grid-template-columns:1fr}
+  .hstats{flex-direction:column;border:none}
+  .hs{border-right:none;border-bottom:1px solid var(--gdk)}
+  .ab-cards{grid-template-columns:1fr}
+  section{padding:4rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav id="topnav">
+  <div class="nav-logo">R<span>.</span>Escalona</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#company">SecureShell</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#milestones">Milestones</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#metrics">Metrics</a></li>
+    <li><a href="#projects">Projects</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-vline"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><div class="ew"></div><span class="et">Operations Manager · Abu Dhabi, UAE</span></div>
+    <h1>
+      <span class="l1">Raffy D.</span>
+      <span class="l2">Escalona</span>
+      <span class="l3">Operations Manager</span>
+    </h1>
+    <p class="hero-sub">9+ years driving telecom infrastructure operations across UAE, Kuwait, and the Philippines. Co-founder of SecureShell ICT — ₱135.7M in 4-year revenue at 98.7% project closure rate.</p>
+    <div class="hstats">
+      <div class="hs"><div class="hs-v">₱135.7M</div><div class="hs-l">4-yr Revenue</div></div>
+      <div class="hs"><div class="hs-v">942</div><div class="hs-l">Projects Delivered</div></div>
+      <div class="hs"><div class="hs-v">98.7%</div><div class="hs-l">Closure Rate</div></div>
+      <div class="hs"><div class="hs-v">96.3%</div><div class="hs-l">Collection Efficiency</div></div>
+    </div>
+    <div class="hbtns">
+      <a href="#company" class="btn-g">View SecureShell ICT ↓</a>
+      <a href="#contact" class="btn-o">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-side">
+    <div class="hs-hdr"><span class="hs-ht">Performance Snapshot</span><span class="live-dot">Live</span></div>
+    <div class="sr-row"><span class="sr-l">Collection Rate</span><span class="sr-v">96.3%</span></div>
+    <div class="sr-row"><span class="sr-l">Closure Rate</span><span class="sr-v">98.7%</span></div>
+    <div class="sr-row"><span class="sr-l">Gross Margin</span><span class="sr-v">~70%</span></div>
+    <div class="sr-row"><span class="sr-l">Peak Revenue</span><span class="sr-v">₱77.3M</span></div>
+    <div class="sr-row"><span class="sr-l">Active Regions</span><span class="sr-v">5 / 5</span></div>
+    <div class="sr-row"><span class="sr-l">Total Projects</span><span class="sr-v">942</span></div>
+    <div class="sr-bar"><div class="sr-fill" style="--w2:96%"></div></div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- ABOUT -->
+<section class="about-sec" id="about">
+  <div class="container">
+    <div class="ab-grid">
+      <div class="rvl">
+        <div class="eye"><div class="eye-l"></div><span class="eye-t">About</span></div>
+        <h2 class="stitle">Builder.<br>Operator.<br><span style="background:linear-gradient(90deg,var(--gd),var(--gd2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Telecom Specialist.</span></h2>
+        <div style="width:28px;height:1px;background:var(--gd);margin:1.1rem 0"></div>
+        <div class="ab-body">
+          <p>Dynamic Operations Manager with 9+ years of progressive leadership across telecom infrastructure, Oil &amp; Gas, and construction environments in the UAE, Kuwait, and the Philippines.</p>
+          <p>Co-founded SecureShell ICT Telecommunication Services in November 2020 — building it from zero into a nationally operating subcontractor delivering 942 projects for Globe Telecom, PLDT, Converge, major tower companies, and enterprise clients nationwide.</p>
+          <p>Currently based in Abu Dhabi, UAE, with deep technical expertise in FTTH, 5G, OSP/ISP, CME, microwave, and Oil &amp; Gas fiber infrastructure.</p>
+        </div>
+        <div class="ab-tags">
+          <span class="atag">FTTH / 5G</span><span class="atag">OSP / ISP</span><span class="atag">CME Works</span>
+          <span class="atag">Microwave</span><span class="atag">P&amp;L Management</span><span class="atag">Oil &amp; Gas</span>
+          <span class="atag">Multi-region Ops</span><span class="atag">Vendor Management</span>
+        </div>
+      </div>
+      <div class="rvr">
+        <div class="ab-cards">
+          <div class="ac wide"><div class="ac-v">9+ Years</div><div class="ac-l" style="color:var(--svl)">Progressive leadership in telecom, Oil &amp; Gas, and construction — UAE · Kuwait · Philippines</div></div>
+          <div class="ac"><div class="ac-i">🏗</div><div class="ac-v">₱135.7M</div><div class="ac-l">4-year company revenue built from scratch</div></div>
+          <div class="ac"><div class="ac-i">📍</div><div class="ac-v">5 Regions</div><div class="ac-l">NLZ · SLZ · NCR · VIS · MIN</div></div>
+          <div class="ac"><div class="ac-i">🌏</div><div class="ac-v">3 Countries</div><div class="ac-l">UAE · Kuwait · Philippines</div></div>
+          <div class="ac"><div class="ac-i">🤝</div><div class="ac-v">6+ Clients</div><div class="ac-l">Globe, PLDT, Converge, tower companies</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- SECURESHELL COMPANY -->
+<section class="ss-sec" id="company">
+  <div class="ss-wm">SECURESHELL</div>
+  <div class="container">
+    <div class="shdr rv">
+      <div class="eye"><div class="eye-l"></div><span class="eye-t">Company · Est. November 2020</span></div>
+      <h2 class="stitle">SecureShell ICT <span style="color:var(--gd)">Telecommunication Services</span></h2>
+      <p class="sdesc">Your number one source of advanced, innovative, and system-integrated ICT and telecom solutions. Philippines-based · Nationwide operations · www.secureshellict.com</p>
+    </div>
+    <div class="ss-grid">
+      <div class="rvl">
+        <div class="ss-brand">
+          <div class="ss-logo">SI</div>
+          <div><div class="ss-n">SecureShell ICT</div><div class="ss-st">Telecom Infrastructure · Cavite, Philippines</div></div>
+        </div>
+        <p class="ss-body">SecureShell ICT is dedicated to providing the best ICT, telecommunication products, and world-class services with a focus on Home Automation, Security Systems, Fire Alarm Systems, Networking, and Hi-Tech Retrofit Gadgets. Founded in 2020, our human resources boast 20–25 years of experience in the field of technology.</p>
+        <p class="ss-body">Our passion for science, engineering, eco-friendly intelligent products, and energy-saving solutions motivates our research, development, and creativity — promoting a comfortable lifestyle, quality of life, and community security through cutting-edge technologies.</p>
+        <div class="cli-lbl">Principal Clients</div>
+        <div class="cli-row">
+          <span class="cpill">Globe Telecom</span><span class="cpill">PLDT</span><span class="cpill">Converge</span>
+          <span class="cpill">DITO Telecommunity</span><span class="cpill">Smart Communications</span>
+        </div>
+        <div class="cli-lbl">Tower Companies</div>
+        <div class="cli-row">
+          <span class="cpill">ISON Tower</span><span class="cpill">EdgePoint Infra</span><span class="cpill">Frontier Towers</span>
+          <span class="cpill">MIESCOR</span><span class="cpill">FiberHome</span>
+        </div>
+        <div class="cli-lbl">Oil &amp; Gas — Kuwait</div>
+        <div class="cli-row">
+          <span class="cpill">KNPC</span><span class="cpill">Petrofac</span><span class="cpill">KOC</span><span class="cpill">CCC</span><span class="cpill">Sinopec</span>
+        </div>
+        <div class="cli-lbl" style="margin-top:1.5rem">Growth Timeline</div>
+        <div class="tl">
+          <div class="tl-i"><div class="tl-y">2020</div><div class="tl-d"></div><div><div class="tl-t">Company Founded — Fiber Optic Installation</div><div class="tl-s">First OSP deployments. Core team assembled. NLZ and SLZ regions established.</div></div></div>
+          <div class="tl-i"><div class="tl-y">2021</div><div class="tl-d"></div><div><div class="tl-t">Engineering &amp; Design — ₱26.9M Revenue</div><div class="tl-s">220 projects. Fiber optic engineering and design scope added. 23-person team deployed.</div></div></div>
+          <div class="tl-i"><div class="tl-y">2022</div><div class="tl-d"></div><div><div class="tl-t">Peak Year — ₱77.3M (+188% YoY)</div><div class="tl-s">570 projects. 5G LTE rollout, Telecom &amp; Microwave, Rectifier/UPS, Power Automation scope added.</div></div></div>
+          <div class="tl-i"><div class="tl-y">2023</div><div class="tl-d"></div><div><div class="tl-t">CME Nationwide Tower Build + Access Control</div><div class="tl-s">119 projects. CME for ISP-Telco tower build nationwide from site hunting to development. Security systems.</div></div></div>
+          <div class="tl-i"><div class="tl-y">2024</div><div class="tl-d"></div><div><div class="tl-t">Full ICT Suite — IBS, Cybersecurity, IT Infra</div><div class="tl-s">Architectural CME fit-out, in-building solutions, enterprise networking, cybersecurity. JTPC/Globe: 33 projects.</div></div></div>
+        </div>
+      </div>
+      <div class="rvr">
+        <div class="cli-lbl" style="margin-bottom:1rem">Key Business Metrics</div>
+        <div class="ss-metrics">
+          <div class="smc"><div class="smc-v">₱135.7M</div><div class="smc-l">4-Year Total Revenue</div><div class="smc-n">USD 2.42M</div></div>
+          <div class="smc"><div class="smc-v">942</div><div class="smc-l">Projects Delivered</div><div class="smc-n">FY 2021–2024</div></div>
+          <div class="smc"><div class="smc-v">98.7%</div><div class="smc-l">Project Closure Rate</div><div class="smc-n">930 of 942 closed</div></div>
+          <div class="smc"><div class="smc-v">96.3%</div><div class="smc-l">Collection Efficiency</div><div class="smc-n">vs 75–85% benchmark</div></div>
+          <div class="smc"><div class="smc-v">~70%</div><div class="smc-l">Gross Margin Est.</div><div class="smc-n">On completed contracts</div></div>
+          <div class="smc"><div class="smc-v">₱5.0M</div><div class="smc-l">Residual Outstanding</div><div class="smc-n">3.7% of total revenue</div></div>
+          <div class="smc"><div class="smc-v">₱77.3M</div><div class="smc-l">Peak Year Revenue</div><div class="smc-n">FY 2022 · +188% YoY</div></div>
+          <div class="smc"><div class="smc-v">₱804K</div><div class="smc-l">Monthly Cost Base</div><div class="smc-n">USD 14.4K lean ops</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- VALUES -->
+<section class="val-sec" id="values">
+  <div class="container">
+    <div class="shdr rv">
+      <div class="eye"><div class="eye-l"></div><span class="eye-t">Company DNA</span></div>
+      <h2 class="stitle">Vision, Mission &amp; <span style="color:var(--gd)">Core Values</span></h2>
+    </div>
+    <div class="val-grid rv">
+      <div class="vc"><div class="vc-icon">🤝</div><div class="vc-t">Integrity</div><div class="vc-d">We keep our promises. Our customers and clients can count on us to meet their ICT needs with consistency and trust.</div></div>
+      <div class="vc"><div class="vc-icon">💡</div><div class="vc-t">Innovation</div><div class="vc-d">We deploy the latest innovation to meet today's needs. Our innovative knowledge has positioned us as a significant ICT stakeholder.</div></div>
+      <div class="vc"><div class="vc-icon">✨</div><div class="vc-t">Creativity</div><div class="vc-d">We engage a high level of creativity, evident in our sleek designs, products, and engineering solutions we deliver.</div></div>
+      <div class="vc"><div class="vc-icon">🎯</div><div class="vc-t">Commitment</div><div class="vc-d">We are committed to research, development of new products, and consistently meeting the evolving ICT needs of our customers.</div></div>
+    </div>
+    <div class="vm-grid rv">
+      <div class="vm"><div class="vm-icon">🔭</div><div class="vm-t">Our Vision</div><div class="vm-d">To provide ICT products that make the world a smarter and safer place every day.</div></div>
+      <div class="vm"><div class="vm-icon">🚀</div><div class="vm-t">Our Mission</div><div class="vm-d">To assist in our clients' planning, deploying, integrating, and managing innovative ICT solutions most elegantly and efficiently.</div></div>
+    </div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- SERVICES -->
+<section class="svc-sec" id="services">
+  <div class="container">
+    <div class="shdr rv">
+      <div class="eye"><div class="eye-l"></div><span class="eye-t">What We Do</span></div>
+      <h2 class="stitle">Services <span style="color:var(--gd)">Offered</span></h2>
+    </div>
+    <p class="svc-intro rv">SecureShell provides integrated ICT solutions across all sectors of the economy. Our expert knowledge enables us to deliver innovative solutions through digital technology and creativity — building and integrating new technological inventions to deliver smart business solutions.</p>
+    <div class="svc-grid rv">
+      <div class="svc-card">
+        <div class="svc-icon">🌐</div>
+        <div class="svc-title">Network Infrastructure</div>
+        <div class="svc-desc">Structured cabling — copper and fiber optic solutions (OSP &amp; ISP), enterprise core and edge network switches, routers, firewalls, servers, storage, wireless access points, telecom (GSM/broadband and microwave), in-building solutions (IBS &amp; FTTB), intercom systems.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔒</div>
+        <div class="svc-title">Access &amp; Security Services</div>
+        <div class="svc-desc">Biometric systems, RFID &amp; access card, gate barrier, turnstile &amp; bollard, CCTV &amp; IP camera, surveillance &amp; command center solutions for comprehensive facility security.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📞</div>
+        <div class="svc-title">Automation &amp; Telephony</div>
+        <div class="svc-desc">PABX telephone systems (hybrid and cloud solutions), IoT &amp; home automation for intelligent, energy-efficient building management.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">⚡</div>
+        <div class="svc-title">Power Systems</div>
+        <div class="svc-desc">UPS and battery systems, rectifier deployment, power automation, and alarm systems for uninterrupted telecom and enterprise power supply.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🛡</div>
+        <div class="svc-title">IT &amp; Cybersecurity</div>
+        <div class="svc-desc">Vulnerability assessment &amp; penetration testing (VAPT), next-gen endpoint detection &amp; response, firewall, network detection, unified backup solutions (on-prem &amp; cloud), wireless access points.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🏗</div>
+        <div class="svc-title">Civil, Mechanical &amp; Electrical</div>
+        <div class="svc-desc">Site hunting, site acquisition &amp; permitting, tower site build and development for telecom infrastructure, interior rendering, architectural and fit-out works nationwide.</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--gdk);overflow:hidden" class="rv">
+      <div style="background:var(--blk3);padding:1.25rem;border-right:1px solid var(--gdk)">
+        <div class="cli-lbl" style="margin-bottom:.65rem">Consultancy</div>
+        <p style="font-size:.78rem;color:var(--glt);line-height:1.65;font-weight:300">Expert guidance on costing, estimation, risk management, site survey, regulatory compliance, and technical resources to help your business maximize ICT for competitive advantage.</p>
+      </div>
+      <div style="background:var(--blk3);padding:1.25rem;border-right:1px solid var(--gdk)">
+        <div class="cli-lbl" style="margin-bottom:.65rem">Design &amp; Engineering</div>
+        <p style="font-size:.78rem;color:var(--glt);line-height:1.65;font-weight:300">In-depth study and analysis of technical requirements, design, engineering, R&amp;D, OEM, drawings, documentation, presentations, and submittals.</p>
+      </div>
+      <div style="background:var(--blk3);padding:1.25rem">
+        <div class="cli-lbl" style="margin-bottom:.65rem">Installation &amp; Commissioning</div>
+        <p style="font-size:.78rem;color:var(--glt);line-height:1.65;font-weight:300">Site installation, configuration, hardware commissioning, technical test acceptance, test equipment, actual demonstration, FAT &amp; SAT to ensure full project delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- MILESTONES -->
+<section class="ms-sec" id="milestones">
+  <div class="container">
+    <div class="shdr rv">
+      <div class="eye"><div class="eye-l"></div><span class="eye-t">Company History</span></div>
+      <h2 class="stitle">Milestones &amp; <span style="color:var(--gd)">Achievements</span></h2>
+    </div>
+    <div class="ms-grid rv">
+      <div class="ms-card"><div class="ms-yr">2020</div><div class="ms-item">Fiber Optic Solution Installation</div><div class="ms-item">Company founding — Cavite, PH</div><div class="ms-item">First OSP deployments NLZ/SLZ</div></div>
+      <div class="ms-card"><div class="ms-yr">2021</div><div class="ms-item">Fiber Optic Engineering &amp; Design</div><div class="ms-item">₱26.9M revenue — 220 projects</div><div class="ms-item">23-person field team deployed</div></div>
+      <div class="ms-card"><div class="ms-yr">2022</div><div class="ms-item">Telecom &amp; Microwave — 5G LTE rollout</div><div class="ms-item">Rectifier, UPS, Power Automation</div><div class="ms-item">₱77.3M peak — 570 projects</div></div>
+      <div class="ms-card"><div class="ms-yr">2023</div><div class="ms-item">CME Nationwide Tower Build</div><div class="ms-item">Site hunting to site development</div><div class="ms-item">Access Control &amp; Security Systems</div></div>
+      <div class="ms-card"><div class="ms-yr">2024</div><div class="ms-item">Architectural CME &amp; Fit-Out Works</div><div class="ms-item">In-building Solutions (IBS &amp; FTTB)</div><div class="ms-item">Cybersecurity &amp; IT Infrastructure</div><div class="ms-item">Enterprise Routing &amp; Network</div></div>
+    </div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- COMPLETED SITES GALLERY -->
+<section class="gallery-sec" id="sites">
+  <div class="container">
+    <div class="shdr rv">
+      <div class="eye"><div class="eye-l"></div><span class="eye-t">Field Work</span></div>
+      <h2 class="stitle">Completed <span style="color:var(--gd)">Project Sites</span></h2>
+    </div>
+    <div class="gal-tabs rv">
+      <div class="gtab on" onclick="switchTab(this,'osp')">OSP Projects</div>
+      <div class="gtab" onclick="switchTab(this,'telecom')">Telecom Installation</div>
+      <div class="gtab" onclick="switchTab(this,'cme')">CME Scope</div>
+      <div class="gtab" onclick="switchTab(this,'it')">IT Infrastructure</div>
+      <div class="gtab" onclick="switchTab(this,'fitout')">Fit-Out Works</div>
+    </div>
+
+    <div class="gal-pane on" id="pane-osp">
+      <p class="gal-desc">BTS Macro FOC Solution — OSP fiber laying and fixing, termination/splicing and grooming, ODF installation, pole excavation/erection, and labelling across multiple nationwide sites including Camarines Sur, Oriental Mindoro, Occidental Mindoro, and Kalinga.</p>
+      <div class="photo-grid">
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-cable" style="font-size:2rem;color:var(--gd)"></i><span>Site Survey / Staking<br>Naga City, Camarines Sur</span></div><div class="photo-lbl">FOC Survey — NLZ</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-ladder" style="font-size:2rem;color:var(--gd)"></i><span>FOC Laying &amp; Fixing<br>Pole-mounted aerial</span></div><div class="photo-lbl">FOC Laying — SLZ</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-tool" style="font-size:2rem;color:var(--gd)"></i><span>Termination / Splicing<br>and Grooming</span></div><div class="photo-lbl">Splicing — Calapan, Ormin</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-server" style="font-size:2rem;color:var(--gd)"></i><span>ODF Installation<br>HUAWEI equipment</span></div><div class="photo-lbl">ODF Install — NLZ</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-shovel" style="font-size:2rem;color:var(--gd)"></i><span>Pole Excavation &amp; Erection<br>San Jose, Occ Mindoro</span></div><div class="photo-lbl">Pole Works — SLZ</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-antenna" style="font-size:2rem;color:var(--gd)"></i><span>Mess Wire Laying &amp; Fixing<br>Tabuk City, Kalinga</span></div><div class="photo-lbl">FOC Works — NLZ Kalinga</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-circuit-diode" style="font-size:2rem;color:var(--gd)"></i><span>Fibre Termination<br>End-state solution</span></div><div class="photo-lbl">Termination — SLZ</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-tag" style="font-size:2rem;color:var(--gd)"></i><span>Labelling &amp; Tagging<br>Final site documentation</span></div><div class="photo-lbl">Labelling — VIS</div></div>
+      </div>
+    </div>
+
+    <div class="gal-pane" id="pane-telecom">
+      <p class="gal-desc">BTS Telecom Solution — ODC and rectifier cabinet installation, antenna &amp; RRU installation, cable laying and grooming across sites in Nueva Vizcaya and Nueva Ecija. Covers 5G LTE rollout, microwave wireless transport, and power system integration.</p>
+      <div class="photo-grid">
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-cpu" style="font-size:2rem;color:var(--gd)"></i><span>BTS ODC &amp; Rectifier<br>Cabinet Installation</span></div><div class="photo-lbl">Rectifier Cabinet — Nueva Vizcaya</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-satellite" style="font-size:2rem;color:var(--gd)"></i><span>Antenna &amp; RRU<br>Installation</span></div><div class="photo-lbl">Antenna Install — Bayombong</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-plug" style="font-size:2rem;color:var(--gd)"></i><span>Cable Laying<br>&amp; Grooming</span></div><div class="photo-lbl">Cable Grooming — NLZ</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-battery-charging" style="font-size:2rem;color:var(--gd)"></i><span>Power System<br>Integration — BTS</span></div><div class="photo-lbl">Power Works — Nueva Ecija</div></div>
+      </div>
+    </div>
+
+    <div class="gal-pane" id="pane-cme">
+      <p class="gal-desc">Civil, Mechanical and Electrical (CME) scope at tower sites — genset &amp; fuel tank pad, lightning arrester, obstruction lights, down conductor, tower bus bar, cable ladder &amp; waveguide bridge, insulation tests, ACPDB voltage test, tower verticality test, and torque test. Location: Magalang, Pampanga.</p>
+      <div class="photo-grid">
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-building-skyscraper" style="font-size:2rem;color:var(--gd)"></i><span>Tower Site Full View<br>CME completed</span></div><div class="photo-lbl">Tower Site — Magalang, Pampanga</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-engine" style="font-size:2rem;color:var(--gd)"></i><span>Genset &amp; Fuel<br>Tank Pad</span></div><div class="photo-lbl">Genset Install — Pampanga</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-bolt" style="font-size:2rem;color:var(--gd)"></i><span>Lightning Arrester<br>&amp; OB Light</span></div><div class="photo-lbl">Lightning Protection — CME</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-ladder" style="font-size:2rem;color:var(--gd)"></i><span>Cable Ladder &amp;<br>Waveguide Bridge</span></div><div class="photo-lbl">Cable Ladder — Pampanga</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-circuit-ammeter" style="font-size:2rem;color:var(--gd)"></i><span>Insulation Test<br>ACPDB Voltage Test</span></div><div class="photo-lbl">Electrical Test — CME</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-ruler-2" style="font-size:2rem;color:var(--gd)"></i><span>Tower Verticality<br>Test</span></div><div class="photo-lbl">Verticality Test — NLZ</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-settings" style="font-size:2rem;color:var(--gd)"></i><span>Torque Test<br>Tower bolts</span></div><div class="photo-lbl">Torque Test — Pampanga</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-arrows-down-up" style="font-size:2rem;color:var(--gd)"></i><span>Down Conductor<br>Installation</span></div><div class="photo-lbl">Down Conductor — CME</div></div>
+      </div>
+    </div>
+
+    <div class="gal-pane" id="pane-it">
+      <p class="gal-desc">IT Infrastructure — structured cabling, patch panel termination, cable grooming, patching and commissioning. Location: Northgate Cyberzone Filinvest, Alabang. Enterprise network switching, storage, servers, and cybersecurity deployments.</p>
+      <div class="photo-grid">
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-server-2" style="font-size:2rem;color:var(--gd)"></i><span>Patch Panel<br>Termination</span></div><div class="photo-lbl">Patch Panel — Alabang</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-plug-connected" style="font-size:2rem;color:var(--gd)"></i><span>Cable Grooming<br>Server rack</span></div><div class="photo-lbl">Cable Grooming — Filinvest</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-circuit-diode" style="font-size:2rem;color:var(--gd)"></i><span>Patching &amp;<br>Commissioning</span></div><div class="photo-lbl">Commissioning — NCR</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-shield-lock" style="font-size:2rem;color:var(--gd)"></i><span>Enterprise Network<br>Cybersecurity</span></div><div class="photo-lbl">Security Infra — NCR</div></div>
+      </div>
+    </div>
+
+    <div class="gal-pane" id="pane-fitout">
+      <p class="gal-desc">Fit-Out and Interior Design projects — architectural rendering, CME for commercial spaces, and complete interior renovation. Completed projects include café and commercial spaces in Dasmariñas City and Ayala Alabang, Muntinlupa.</p>
+      <div class="photo-grid">
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-palette" style="font-size:2rem;color:var(--gd)"></i><span>Interior Design<br>3D Rendering</span></div><div class="photo-lbl">Design Render — Dasmariñas</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-hammer" style="font-size:2rem;color:var(--gd)"></i><span>Construction<br>Implementation</span></div><div class="photo-lbl">Build Works — Dasmariñas</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-armchair" style="font-size:2rem;color:var(--gd)"></i><span>Interior Completion<br>Café &amp; retail</span></div><div class="photo-lbl">Fit-Out Complete — Dasmariñas</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-building-store" style="font-size:2rem;color:var(--gd)"></i><span>Commercial Space<br>Muntinlupa</span></div><div class="photo-lbl">Fit-Out — Ayala Alabang</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-coffee" style="font-size:2rem;color:var(--gd)"></i><span>Anthology Coffee<br>Interior Complete</span></div><div class="photo-lbl">Anthology Coffee — Muntinlupa</div></div>
+        <div class="photo-card"><div class="photo-placeholder" style="background:var(--blk3)"><i class="ti ti-brush" style="font-size:2rem;color:var(--gd)"></i><span>Final Fit-Out<br>Commercial space</span></div><div class="photo-lbl">Completion — Alabang</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- BRAND PARTNERS -->
+<section class="brand-sec" id="brands">
+  <div class="container">
+    <div class="shdr rv">
+      <div class="eye"><div class="eye-l"></div><span class="eye-t">Technology Partners</span></div>
+      <h2 class="stitle">Brand <span style="color:var(--gd)">Offering</span></h2>
+    </div>
+    <p class="brand-intro rv">SecureShell ICT partners with world-class technology brands to deliver hardware and software solutions compliant with international standards (ISO 9001, TL9000, ANSI/ESD, Qi, CE, FCC, ROHS).</p>
+    <div class="rv">
+      <div class="brand-cat">
+        <div class="bcat-title">Network Infrastructure &amp; IT</div>
+        <div class="brand-chips">
+          <span class="bchip">Cisco</span><span class="bchip">HP</span><span class="bchip">Dell</span><span class="bchip">Lenovo</span><span class="bchip">Belden</span><span class="bchip">TP-Link</span><span class="bchip">D-Link</span><span class="bchip">Acer</span><span class="bchip">ASUS</span><span class="bchip">Microsoft</span><span class="bchip">Autodesk</span><span class="bchip">Synology</span><span class="bchip">ONAP</span><span class="bchip">Solarwinds</span><span class="bchip">Poly</span>
+        </div>
+      </div>
+      <div class="brand-cat">
+        <div class="bcat-title">Security &amp; Access Control</div>
+        <div class="brand-chips">
+          <span class="bchip">Hikvision</span><span class="bchip">Impro</span><span class="bchip">Canon</span><span class="bchip">Logitech</span><span class="bchip">eHOME Control</span><span class="bchip">Grandstream</span><span class="bchip">Mitel</span><span class="bchip">Panasonic</span><span class="bchip">AVAYA</span><span class="bchip">Samsung</span>
+        </div>
+      </div>
+      <div class="brand-cat">
+        <div class="bcat-title">Cybersecurity</div>
+        <div class="brand-chips">
+          <span class="bchip">Fortinet</span><span class="bchip">Sophos</span><span class="bchip">SonicWall</span><span class="bchip">McAfee</span><span class="bchip">Trellix</span><span class="bchip">Tenable</span><span class="bchip">Adobe</span><span class="bchip">Google</span><span class="bchip">Parallels</span><span class="bchip">Richfield</span>
+        </div>
+      </div>
+      <div class="brand-cat">
+        <div class="bcat-title">Power &amp; Automation</div>
+        <div class="brand-chips">
+          <span class="bchip">APC by Schneider</span><span class="bchip">MEC</span><span class="bchip">Brother</span><span class="bchip">Zoom</span><span class="bchip">SketchUp</span><span class="bchip">EPSON</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- EXPERIENCE -->
+<section class="exp-sec" id="experience">
+  <div class="container">
+    <div class="shdr rv">
+      <div class="eye"><div class="eye-l"></div><span class="eye-t">Career History</span></div>
+      <h2 class="stitle">Professional <span style="color:var(--gd)">Experience</span></h2>
+      <p class="sdesc">9+ years across three countries. Click any role to expand details.</p>
+    </div>
+    <div class="exp-list rv">
+
+      <div class="exp-item on" onclick="toggleExp(this)">
+        <div class="exp-inner"><div class="exp-bar"></div>
+        <div class="exp-wrap">
+          <div class="exp-hdr">
+            <div><div class="exp-ttl">Operations Manager / Co-Founder</div><div class="exp-co">SecureShell ICT Telecommunication Services</div></div>
+            <div class="exp-rt"><span class="exp-pd">Nov 2020 – Dec 2025</span><div class="exp-lc">Cavite, Philippines</div><div class="exp-tb">▲ collapse</div></div>
+          </div>
+          <div class="exp-body">
+            <div class="exp-intro">Founded and scaled a full-service telecom infrastructure company from zero, with full P&L, operational, and strategic accountability across a national portfolio of OSP, CME, telecom, and microwave contracts.</div>
+            <div class="exp-sh">Business &amp; Financial Performance</div>
+            <ul class="exp-bul">
+              <li>Generated ₱135.7M (USD 2.42M) in 4-year cumulative revenue — startup to nationally operating subcontractor within 4 years</li>
+              <li>Achieved ₱77.3M (USD 1.38M) peak revenue in FY 2022 — 188% YoY growth from FY 2021</li>
+              <li>Maintained 96.3% collection efficiency, exceeding the 75–85% industry benchmark</li>
+              <li>Managed full P&L with ₱804K monthly cost base, delivering ~70% estimated gross margin</li>
+              <li>Reduced outstanding receivables from ₱53.7M to ₱5.0M residual through structured collections</li>
+            </ul>
+            <div class="exp-sh">Project Delivery</div>
+            <ul class="exp-bul">
+              <li>Delivered 942 projects across 5 regions (NLZ, SLZ, NCR, VIS, MIN) — 98.7% closure rate</li>
+              <li>Led multi-region rollouts for Globe Telecom, PLDT, Converge (FTTH, 5G, FTTB, OLT, PON) and major tower companies</li>
+              <li>Managed 23 field and back-office personnel achieving 71% closure rate in NLZ and 64% in SLZ</li>
+              <li>Oversaw full project lifecycle: LLD design, permitting, OSP/CME deployment, splicing, testing, PAT, and billing closeout</li>
+            </ul>
+            <div class="exp-sh">Business Development</div>
+            <ul class="exp-bul">
+              <li>Diversified client portfolio from single-client to 6+ active clients across telecom and tower company ecosystem</li>
+              <li>Onboarded new Globe ecosystem contracts in FY 2024 — 33 projects, ₱12.5M in first engagement year</li>
+              <li>Expanded capability into ISP inside-plant scope and government institutional contracts</li>
+            </ul>
+            <div class="exp-chips">
+              <span class="echip">P&amp;L Management</span><span class="echip">OSP/CME/TW/MW</span><span class="echip">FTTH/5G</span>
+              <span class="echip">Multi-region Ops</span><span class="echip">Vendor Management</span><span class="echip">Business Development</span>
+            </div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="exp-item" onclick="toggleExp(this)">
+        <div class="exp-inner"><div class="exp-bar"></div>
+        <div class="exp-wrap">
+          <div class="exp-hdr">
+            <div><div class="exp-ttl">OSP Site Engineer / Supervisor</div><div class="exp-co">COMMSEC Inc.</div></div>
+            <div class="exp-rt"><span class="exp-pd">Jun 2020 – Oct 2020</span><div class="exp-lc">Pasay, Philippines</div><div class="exp-tb">▼ expand</div></div>
+          </div>
+          <div class="exp-body">
+            <ul class="exp-bul">
+              <li>Oversaw daily field operations including site surveys, cable installation, splicing, and commissioning for Globe Telecom OLT FTTB &amp; FTTH Expansion across Luzon</li>
+              <li>Enforced QA and HSE compliance; managed project documentation, site acceptance, and billing closeout</li>
+            </ul>
+            <div class="exp-chips"><span class="echip">OSP</span><span class="echip">FTTB/FTTH</span><span class="echip">Globe Telecom</span><span class="echip">HSE</span></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="exp-item" onclick="toggleExp(this)">
+        <div class="exp-inner"><div class="exp-bar"></div>
+        <div class="exp-wrap">
+          <div class="exp-hdr">
+            <div><div class="exp-ttl">OSP / ISP Technician &amp; Site Document Support</div><div class="exp-co">IVS Technology Services L.L.C.</div></div>
+            <div class="exp-rt"><span class="exp-pd">May 2018 – May 2020</span><div class="exp-lc">Kuwait</div><div class="exp-tb">▼ expand</div></div>
+          </div>
+          <div class="exp-body">
+            <ul class="exp-bul">
+              <li>Led backbone fiber network installations across major Oil &amp; Gas facilities — KNPC, Petrofac, KOC, CCC, Sinopec</li>
+              <li>Managed site BOQ/BOM documentation, material tracking, and audit compliance across LFHO Phase 1, MAB Clean Fuel, SVS Pipeline, and Al-Zour Refinery</li>
+              <li>Coordinated with multi-national EPC teams ensuring on-schedule delivery</li>
+            </ul>
+            <div class="exp-chips"><span class="echip">Oil &amp; Gas</span><span class="echip">Backbone Fiber</span><span class="echip">KNPC/Petrofac</span><span class="echip">BOQ/BOM</span></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="exp-item" onclick="toggleExp(this)">
+        <div class="exp-inner"><div class="exp-bar"></div>
+        <div class="exp-wrap">
+          <div class="exp-hdr">
+            <div><div class="exp-ttl">Asset / PR Coordinator</div><div class="exp-co">Azizi Developments L.L.C.</div></div>
+            <div class="exp-rt"><span class="exp-pd">Apr 2017 – Apr 2018</span><div class="exp-lc">Dubai, UAE</div><div class="exp-tb">▼ expand</div></div>
+          </div>
+          <div class="exp-body">
+            <ul class="exp-bul">
+              <li>Managed asset inventory tracking, tagging, and movement control; coordinated procurement and delivery logistics</li>
+              <li>Assisted HR operations: document control, visa processing, payroll administration</li>
+            </ul>
+            <div class="exp-chips"><span class="echip">Real Estate</span><span class="echip">Asset Management</span><span class="echip">Dubai UAE</span></div>
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- METRICS -->
+<section class="met-sec" id="metrics">
+  <div class="container">
+    <div class="shdr rv">
+      <div class="eye"><div class="eye-l"></div><span class="eye-t">Performance Data</span></div>
+      <h2 class="stitle">SecureShell ICT — <span style="color:var(--gd)">By the Numbers</span></h2>
+    </div>
+    <div class="met-grid rv">
+      <div class="mc"><div class="mc-v">₱135.7M</div><div class="mc-l">Total Contract Value</div><div class="mc-s">USD 2.42M · FY 2021–2024</div></div>
+      <div class="mc"><div class="mc-v">942</div><div class="mc-l">Projects Delivered</div><div class="mc-s">5 national regions</div></div>
+      <div class="mc"><div class="mc-v">98.7%</div><div class="mc-l">Closure Rate</div><div class="mc-s">930 of 942 sites closed</div></div>
+      <div class="mc"><div class="mc-v">96.3%</div><div class="mc-l">Collection Efficiency</div><div class="mc-s">vs 75–85% industry avg</div></div>
+      <div class="mc"><div class="mc-v">₱77.3M</div><div class="mc-l">Peak Year FY 2022</div><div class="mc-s">+188% YoY growth</div></div>
+      <div class="mc"><div class="mc-v">~70%</div><div class="mc-l">Gross Margin Est.</div><div class="mc-s">On completed contracts</div></div>
+      <div class="mc"><div class="mc-v">₱5.0M</div><div class="mc-l">Residual Receivables</div><div class="mc-s">3.7% of total — low risk</div></div>
+      <div class="mc"><div class="mc-v">₱804K</div><div class="mc-l">Monthly Cost Base</div><div class="mc-s">USD 14.4K lean model</div></div>
+    </div>
+    <div class="chart-bx rv">
+      <div class="chart-hdr">
+        <div class="chart-t">Annual Revenue — Actual vs Target (₱M)</div>
+        <div class="chart-leg">
+          <span><span class="ldot" style="background:linear-gradient(var(--gd2),var(--gd))"></span>Actual</span>
+          <span><span class="ldot" style="background:rgba(184,188,196,.2);border:1px solid var(--sv)"></span>Target</span>
+        </div>
+      </div>
+      <div class="barchart">
+        <div class="bcol"><div class="bwrap"><div class="bar act" style="height:35%"></div></div><div class="bval">₱26.9M</div><div class="blbl">2021</div></div>
+        <div class="bcol"><div class="bwrap"><div class="bar act" style="height:100%"></div></div><div class="bval">₱77.3M</div><div class="blbl">2022</div></div>
+        <div class="bcol"><div class="bwrap"><div class="bar act" style="height:25%"></div></div><div class="bval">₱19.0M</div><div class="blbl">2023</div></div>
+        <div class="bcol"><div class="bwrap"><div class="bar act" style="height:16%"></div></div><div class="bval">₱12.5M</div><div class="blbl">2024</div></div>
+        <div class="bcol"><div class="bwrap"><div class="bar tgt" style="height:155%"></div></div><div class="bval t">₱120M</div><div class="blbl t">2025T</div></div>
+        <div class="bcol"><div class="bwrap"><div class="bar tgt" style="height:258%"></div></div><div class="bval t">₱200M</div><div class="blbl t">2026T</div></div>
+        <div class="bcol"><div class="bwrap"><div class="bar tgt" style="height:387%"></div></div><div class="bval t">₱300M</div><div class="blbl t">2027T</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- PROJECTS -->
+<section class="proj-sec" id="projects">
+  <div class="container">
+    <div class="shdr rv">
+      <div class="eye"><div class="eye-l"></div><span class="eye-t">Portfolio</span></div>
+      <h2 class="stitle">Key <span style="color:var(--gd)">Projects</span></h2>
+    </div>
+    <div class="proj-grid rv">
+      <div class="pc"><div class="pc-top"><div class="pc-cl">Globe Telecom / PLDT / Converge</div><div class="pc-nm">FTTH Nationwide Expansion</div><div class="pc-ds">Macro, OLT, PON, FTBTS, FTTB, FTTH deployment across 5 national regions. Principal anchor client driving majority of SecureShell ICT revenue over 4 years.</div></div><div class="pc-bot"><span class="pc-sc">OSP · ISP</span><span class="pc-vl">Multi-year</span></div></div>
+      <div class="pc"><div class="pc-top"><div class="pc-cl">Globe Telecom</div><div class="pc-nm">Microwave &amp; Transmission Equipment</div><div class="pc-ds">Nationwide transmission equipment and microwave wireless transport projects. Antenna alignment, commissioning, and link optimization — 5G LTE rollout integration.</div></div><div class="pc-bot"><span class="pc-sc">MW · TW</span><span class="pc-vl">Nationwide</span></div></div>
+      <div class="pc"><div class="pc-top"><div class="pc-cl">Tower Companies — Multi-TOWERCO</div><div class="pc-nm">Telecom Tower CME Infrastructure</div><div class="pc-ds">Civil, mechanical, and electrical works for tower infrastructure across multiple tower companies. AC, EAS, and site upgrade scope for telecom tower build nationwide.</div></div><div class="pc-bot"><span class="pc-sc">CME · EAS</span><span class="pc-vl">Nationwide</span></div></div>
+      <div class="pc"><div class="pc-top"><div class="pc-cl">Globe Telecom Ecosystem</div><div class="pc-nm">FY 2024 OSP Rollout — 33 Projects</div><div class="pc-ds">33 active projects worth ₱12.5M across VIS, SLZ, NLZ, MIN, and NCR. NSB 72C and 12C hybrid fiber installations under Globe's super-vendor framework.</div></div><div class="pc-bot"><span class="pc-sc">OSP · Fiber</span><span class="pc-vl">₱12.5M</span></div></div>
+      <div class="pc"><div class="pc-top"><div class="pc-cl">Government — Bureau of Corrections</div><div class="pc-nm">NBP Inside-Plant Network (ISP)</div><div class="pc-ds">FOC and UTP inside-plant fiber network at New Bilibid Prison. First government institutional ISP scope — a new revenue line beyond traditional OSP.</div></div><div class="pc-bot"><span class="pc-sc">ISP · Gov't</span><span class="pc-vl">₱1.37M</span></div></div>
+      <div class="pc"><div class="pc-top"><div class="pc-cl">KNPC / Petrofac / KOC / Sinopec</div><div class="pc-nm">Kuwait Oil &amp; Gas Backbone Fiber</div><div class="pc-ds">Backbone fiber installations across Kuwait's major Oil &amp; Gas facilities — LFHO Phase 1 CPF &amp; ISS, MAB Clean Fuel, SVS Pipeline, STF Magwa, Al-Zour Refinery.</div></div><div class="pc-bot"><span class="pc-sc">Oil &amp; Gas · OSP</span><span class="pc-vl">Kuwait</span></div></div>
+    </div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- SKILLS -->
+<section class="sk-sec" id="skills">
+  <div class="container">
+    <div class="shdr rv">
+      <div class="eye"><div class="eye-l"></div><span class="eye-t">Capabilities</span></div>
+      <h2 class="stitle">Skills &amp; <span style="color:var(--gd)">Expertise</span></h2>
+    </div>
+    <div class="sk-grid rv">
+      <div>
+        <div class="sg-t" style="margin-bottom:1.2rem">Operations &amp; Management</div>
+        <div class="ski"><span class="sk-n">Operations Management</span><div class="sk-tr"><div class="sk-fl" style="--p:97%"></div></div><span class="sk-pct">97%</span></div>
+        <div class="ski"><span class="sk-n">P&amp;L / Budget Control</span><div class="sk-tr"><div class="sk-fl" style="--p:92%"></div></div><span class="sk-pct">92%</span></div>
+        <div class="ski"><span class="sk-n">Team Leadership</span><div class="sk-tr"><div class="sk-fl" style="--p:95%"></div></div><span class="sk-pct">95%</span></div>
+        <div class="ski"><span class="sk-n">Vendor Management</span><div class="sk-tr"><div class="sk-fl" style="--p:90%"></div></div><span class="sk-pct">90%</span></div>
+        <div class="ski"><span class="sk-n">Strategic Planning</span><div class="sk-tr"><div class="sk-fl" style="--p:88%"></div></div><span class="sk-pct">88%</span></div>
+        <div class="ski"><span class="sk-n">Risk Management</span><div class="sk-tr"><div class="sk-fl" style="--p:85%"></div></div><span class="sk-pct">85%</span></div>
+        <div style="height:1.75rem"></div>
+        <div class="sg-t">Technical Expertise</div>
+        <div class="ski"><span class="sk-n">OSP / ISP Deployment</span><div class="sk-tr"><div class="sk-fl" style="--p:98%"></div></div><span class="sk-pct">98%</span></div>
+        <div class="ski"><span class="sk-n">FTTH / 5G Networks</span><div class="sk-tr"><div class="sk-fl" style="--p:95%"></div></div><span class="sk-pct">95%</span></div>
+        <div class="ski"><span class="sk-n">CME Works</span><div class="sk-tr"><div class="sk-fl" style="--p:88%"></div></div><span class="sk-pct">88%</span></div>
+        <div class="ski"><span class="sk-n">Microwave / TW</span><div class="sk-tr"><div class="sk-fl" style="--p:82%"></div></div><span class="sk-pct">82%</span></div>
+        <div class="ski"><span class="sk-n">Oil &amp; Gas Fiber</span><div class="sk-tr"><div class="sk-fl" style="--p:85%"></div></div><span class="sk-pct">85%</span></div>
+      </div>
+      <div class="tools-s">
+        <div><div class="sg-t">Tools &amp; Equipment</div><div class="chips"><span class="chip">OTDR / OPM</span><span class="chip">Fujikura Splicer</span><span class="chip">Sumitomo</span><span class="chip">EXFO / AFL</span><span class="chip">Fluke Tester</span><span class="chip">Multimeter</span><span class="chip">Megger / IRT</span><span class="chip">IPC Tester</span><span class="chip">Anritsu</span><span class="chip">Comway</span></div></div>
+        <div><div class="sg-t">Software &amp; Systems</div><div class="chips"><span class="chip">MS Excel</span><span class="chip">MS Project</span><span class="chip">MS Word</span><span class="chip">PowerPoint</span><span class="chip">ERP Systems</span><span class="chip">Project Tracker</span><span class="chip">AutoCAD (basic)</span><span class="chip">Outlook</span></div></div>
+        <div><div class="sg-t">Industries</div><div class="chips"><span class="chip">Telecom Infrastructure</span><span class="chip">Oil &amp; Gas</span><span class="chip">Construction</span><span class="chip">Real Estate</span><span class="chip">Government</span><span class="chip">IT Security</span></div></div>
+        <div>
+          <div class="sg-t">Education</div>
+          <div class="edu-box">
+            <div class="edu-t">B.S. Hotel and Restaurant Management</div>
+            <div class="edu-s">De La Salle University – Dasmariñas</div>
+            <div class="edu-y">2010 – 2015 · Philippines</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="gold-hr"></div>
+
+<!-- CONTACT -->
+<section class="ct-sec" id="contact">
+  <div class="container">
+    <div class="ct-inner rv">
+      <div class="eye" style="justify-content:center"><div class="eye-l"></div><span class="eye-t">Get in Touch</span><div class="eye-l"></div></div>
+      <h2 class="ct-t">Let's Build Something <span>Together</span></h2>
+      <p class="ct-sub">Available for Operations Manager, Project Director, and Telecom Infrastructure leadership roles. Open to opportunities in UAE, Philippines, and internationally.</p>
+      <a href="https://www.secureshellict.com" class="web-link" target="_blank">🌐 &nbsp;www.secureshellict.com ↗</a>
+      <div class="ct-cards">
+        <div class="ccc"><div class="ccc-i">📍</div><div class="ccc-l">Location</div><div class="ccc-v">Al Falah St., Abu Dhabi, UAE</div></div>
+        <div class="ccc"><div class="ccc-i">📞</div><div class="ccc-l">Phone</div><div class="ccc-v">+971 561 450 306</div></div>
+        <div class="ccc"><div class="ccc-i">✉️</div><div class="ccc-l">Email (Company)</div><div class="ccc-v">admin@secureshellict.com</div></div>
+      </div>
+      <div class="refs">
+        <strong>References available on request</strong><br>
+        Eleanor Alba — HR Manager, SecureShell ICT &nbsp;|&nbsp; Bryan Mabanag — PM, IVS Technology Services &nbsp;|&nbsp; Sandeep Pathania — HR Manager, Azizi Developments
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fl">© 2025 <strong>Raffy D. Escalona</strong> — Operations Manager · Abu Dhabi, UAE</div>
+  <div class="fr">Co-Founder &amp; OM — <strong>SecureShell ICT</strong> Telecommunication Services</div>
+</footer>
+
+<script>
+function toggleExp(el){
+  const on=el.classList.contains('on');
+  document.querySelectorAll('.exp-item').forEach(e=>{e.classList.remove('on');e.querySelector('.exp-tb').textContent='▼ expand';});
+  if(!on){el.classList.add('on');el.querySelector('.exp-tb').textContent='▲ collapse';}
+}
+function switchTab(btn,id){
+  document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.gal-pane').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('pane-'+id).classList.add('on');
+}
+const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:0.08});
+document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{
+  let cur='';
+  document.querySelectorAll('section[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-140)cur=s.id;});
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('act',a.getAttribute('href')==='#'+cur));
+  document.getElementById('topnav').style.borderBottomColor=window.scrollY>80?'rgba(193,155,46,.18)':'rgba(193,155,46,.1)';
+});
+</script>
+</body>
+</html>
